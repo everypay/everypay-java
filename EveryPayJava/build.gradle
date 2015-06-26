@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+
+//archivesBaseName = 'everypay-java'
+sourceCompatibility = 1.7
+
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ['src/com/everypay/test']
+        }
+    }
+}
+
+buildDir = 'out'
+
+repositories {
+
+mavenCentral()
+  maven {     url "http://www.bugsense.com/gradle/"   }
+}
+
+dependencies {
+compile "com.bugsense.trace:bugsense:3.5" 
+compile files('org.json-20120521.jar')
+compile 'junit:junit:4.8.+'
+compile files('./javabase64-1.3.1.jar')
+}
+
+task wrapper(type: Wrapper) {
+gradleVersion = '2.0'
+}
+
+//task copy(type: Copy, dependsOn: build) {
+//    from 'out/libs'
+//    into '../../EveryPay/EveryPayClient/libs'
+//}

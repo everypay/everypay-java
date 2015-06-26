@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,9 +23,9 @@ import com.everypay.model.Token.TokenType;
 
 public class Payment {
 	public static enum Status {
-		Paid, Refunded, PartiallyRefunded, All
+		captured, refunded, partiallyrefunded, all
 	}
-
+	
 	private final static String JSON_DESCRIPTION = "description";
 	private final static String JSON_DATE_CREATED = "date_created";
 	private final static String JSON_TOKEN = "token";
@@ -34,10 +36,12 @@ public class Payment {
 	private final static String JSON_CARD = "card";
 	private final static String JSON_CUSTOMER = "customer";
 	private final static String JSON_REFUNDED = "refunded";
+	private final static String JSON_REFUNDS = "refunds";
 	private final static String JSON_REFUND_AMOUNT = "refund_amount";
 	private final static String JSON_ERROR = "error";
 	private final static String JSON_MESSAGE = "message";
 
+	private long id;
 	private Date date;
 	private String dateString;
 	private int amount;
@@ -49,6 +53,15 @@ public class Payment {
 	private Status status;
 	private boolean refunded = false;
 	private int refundAmount;
+	private ArrayList<Refund> refunds;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Date getDate() {
 		return date;
@@ -162,6 +175,14 @@ public class Payment {
 		this.dateString = dateString;
 	}
 
+	public ArrayList<Refund> getRefunds() {
+		return refunds;
+	}
+
+	public void setRefunds(ArrayList<Refund> refunds) {
+		this.refunds = refunds;
+	}
+
 	/**
 	 * De-serialization of JSON response to payment object
 	 * 
@@ -198,7 +219,8 @@ public class Payment {
 			jsonDateCreated = jsonPayment.optString(JSON_DATE_CREATED);
 			payment.setDateString(jsonDateCreated);
 			
-			String format = "dd-MM-yyyy hh:mm:ss";
+//			String format = "dd-MM-yyyy hh:mm:ss";
+			String format = "yyyy-MM-dd'T'HH:mm:ssZ";
 			try {
 				SimpleDateFormat formatter = new SimpleDateFormat(format);
 			    Date date = formatter.parse(jsonDateCreated);
@@ -232,12 +254,14 @@ public class Payment {
 
 		if (jsonPayment.has(JSON_STATUS)) {
 			jsonStatus = jsonPayment.optString(JSON_STATUS);
-			if (jsonStatus.equalsIgnoreCase("Paid"))
-				payment.setStatus(Status.Paid);
+			if (jsonStatus.equalsIgnoreCase("Captured"))
+				payment.setStatus(Status.captured);
 			if (jsonStatus.equalsIgnoreCase("Refunded"))
-				payment.setStatus(Status.Refunded);
+				payment.setStatus(Status.refunded);
+			if (jsonStatus.equalsIgnoreCase("Canceled"))
+				payment.setStatus(Status.refunded);
 			if (jsonStatus.equalsIgnoreCase("Partially Refunded"))
-				payment.setStatus(Status.PartiallyRefunded);
+				payment.setStatus(Status.partiallyrefunded);
 		}
 
 		if (jsonPayment.has(JSON_REFUNDED)) {
@@ -255,6 +279,17 @@ public class Payment {
 			payment.setRefundAmount(jsonRefundAmount);
 		}
 
+		if (jsonPayment.has(JSON_REFUNDS)) {
+			payment.setRefunds(new ArrayList<Refund>());
+			JSONArray jsonItems = jsonPayment.getJSONArray(JSON_REFUNDS);
+			for (int i = 0; i < jsonItems.length(); i++) {
+				JSONObject jsonItem = jsonItems.getJSONObject(i);
+				payment.getRefunds().add(Payment.deserializeRefund(jsonItem));
+			}
+		}
+		
+		
+		
 		if (jsonPayment.has(JSON_CARD)) {
 			jsonCard = jsonPayment.optString(JSON_CARD,"");
 			card = payment.getCard();
@@ -302,4 +337,34 @@ public class Payment {
 		return (res) ? payment : null;
 	}
 
+	
+	
+	public static Refund deserializeRefund(JSONObject jsonRefund) throws JSONException, ServerConnectionException {
+
+		Refund refund = new Refund();
+		
+		if (jsonRefund.has(JSON_DESCRIPTION)) {
+			String jsonDescription = jsonRefund.optString(JSON_DESCRIPTION);
+			if (jsonDescription.equalsIgnoreCase("null"))
+				jsonDescription = "";
+			try {
+				refund.description = URLDecoder.decode(jsonDescription, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (jsonRefund.has(JSON_DATE_CREATED)) {
+			refund.dataCreated = jsonRefund.optString(JSON_DATE_CREATED);
+		}
+
+		if (jsonRefund.has(JSON_AMOUNT)) {
+			refund.amount = jsonRefund.getInt(JSON_AMOUNT);
+		}
+
+		return refund;
+	}
+	
+	
+	
 }

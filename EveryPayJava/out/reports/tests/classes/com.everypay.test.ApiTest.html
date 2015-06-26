@@ -1,0 +1,730 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Test results - Class com.everypay.test.ApiTest</title>
+<link href="css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<script src="js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class com.everypay.test.ApiTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.everypay.test.html">com.everypay.test</a> &gt; ApiTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">11</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">14.541s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testAuthorization</td>
+<td>0.579s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testCreateCardToken</td>
+<td>0.854s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFindCardToken</td>
+<td>1.118s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFindPayment</td>
+<td>1.182s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testIsAuthorized</td>
+<td>0.838s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testListPayments</td>
+<td>0.909s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testLogout</td>
+<td>1.465s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testPaymentWithCard</td>
+<td>1.929s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testPaymentWithCardToken</td>
+<td>1.600s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testRefundPayment</td>
+<td>1.831s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSendReceipt</td>
+<td>2.236s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+Find payment:
+{
+    &quot;token&quot;: &quot;pmt_mn649HQzLqalv6kE9h0dNddK&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:39+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 46,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Paid&quot;,
+    &quot;refunded&quot;: false,
+    &quot;refund_amount&quot;: 0,
+    &quot;refunds&quot;: [
+
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+Send receipt for token pmt_ChMsy9Cbm68hbADxuyI10mGb:
+{
+    &quot;customer_email&quot;: &quot;alex.halevin@gmail.com&quot;,
+    &quot;send&quot;: true
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+{
+    &quot;token&quot;: &quot;ctn_DQuIlkaWRITGAEz5Wq7AjdG2&quot;,
+    &quot;is_used&quot;: false,
+    &quot;has_expired&quot;: false,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:43+0300&quot;,
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+New payment with card token:
+{
+    &quot;token&quot;: &quot;pmt_tJsCh977IRcNbH1cV07x1sjx&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:43+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 46,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Paid&quot;,
+    &quot;refunded&quot;: false,
+    &quot;refund_amount&quot;: 0,
+    &quot;refunds&quot;: [
+
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+Find payment:
+{
+    &quot;token&quot;: &quot;pmt_tJsCh977IRcNbH1cV07x1sjx&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:43+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 46,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Paid&quot;,
+    &quot;refunded&quot;: false,
+    &quot;refund_amount&quot;: 0,
+    &quot;refunds&quot;: [
+
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+Refund payment:
+{
+    &quot;token&quot;: &quot;pmt_1HTe9PGniaTDCJB2ZrBRhZSq&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:44+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 0,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Refunded&quot;,
+    &quot;refunded&quot;: true,
+    &quot;refund_amount&quot;: 1100,
+    &quot;refunds&quot;: [
+        {
+            &quot;date_created&quot;: &quot;2014-07-23T15:44:45+0300&quot;,
+            &quot;amount&quot;: 0,
+            &quot;description&quot;: &quot;Test&quot;
+        }
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+Find payment:
+{
+    &quot;token&quot;: &quot;pmt_1HTe9PGniaTDCJB2ZrBRhZSq&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:44+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 0,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Refunded&quot;,
+    &quot;refunded&quot;: true,
+    &quot;refund_amount&quot;: 1100,
+    &quot;refunds&quot;: [
+        {
+            &quot;date_created&quot;: &quot;2014-07-23T15:44:45+0300&quot;,
+            &quot;amount&quot;: 0,
+            &quot;description&quot;: &quot;Test&quot;
+        }
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+is authorized:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+is authorized:
+{
+    &quot;token&quot;: &quot;ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;,
+    &quot;deleted&quot;: true
+}
+
+Content-encoding:
+null
+is authorized:
+{
+    &quot;error&quot;: {
+        &quot;status&quot;: 404,
+        &quot;code&quot;: 70002,
+        &quot;message&quot;: &quot;Could not find session token: ses_xGpP58ld0j5FQCSz8LaZ2hFKn0Pj1L5l&quot;
+    }
+}
+
+Content-encoding:
+null
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_fgfyuPcmNOQJGrRRifjFk95VbvuBdinC&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+{
+    &quot;token&quot;: &quot;ctn_2XtLNGYZHNkBFgj9jo48tzC1&quot;,
+    &quot;is_used&quot;: false,
+    &quot;has_expired&quot;: false,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:49+0300&quot;,
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_fgfyuPcmNOQJGrRRifjFk95VbvuBdinC&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+{
+    &quot;token&quot;: &quot;ctn_ceX9FVs2BOOPnS9zcBZeYJpr&quot;,
+    &quot;is_used&quot;: false,
+    &quot;has_expired&quot;: false,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:50+0300&quot;,
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+{
+    &quot;token&quot;: &quot;ctn_ceX9FVs2BOOPnS9zcBZeYJpr&quot;,
+    &quot;is_used&quot;: false,
+    &quot;has_expired&quot;: false,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:50+0300&quot;,
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_fgfyuPcmNOQJGrRRifjFk95VbvuBdinC&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+List of payments: ===============================================
+
+Content-encoding:
+gzip
+certificate X.509  RSA
+certificate X.509  RSA
+certificate X.509  RSA
+Authorization:
+{
+    &quot;session_token&quot;: &quot;ses_fgfyuPcmNOQJGrRRifjFk95VbvuBdinC&quot;,
+    &quot;card_terminal&quot;: {
+        &quot;description&quot;: null,
+        &quot;secret_key&quot;: &quot;tsk_fPMKyCyzs7zduuJlc00U8cZqaaRj2Zqw&quot;,
+        &quot;serial_number&quot;: &quot;11111&quot;,
+        &quot;company&quot;: {
+            &quot;afm&quot;: &quot;140219148&quot;,
+            &quot;address&quot;: &quot;ΣΤΡ. ΠΑΠΑΓΟΥ&quot;,
+            &quot;title&quot;: null,
+            &quot;address_area&quot;: &quot;ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ&quot;,
+            &quot;description&quot;: &quot;ΜΗΝΑΣ ΚΙΤΣΟΣ&quot;,
+            &quot;address_num&quot;: &quot;131&quot;,
+            &quot;occupation&quot;: &quot;ΕΠΕΞΕΡΓΑΣΙΑ ΔΕΔΟΜΕΝΩΝ&quot;,
+            &quot;fixed_phone&quot;: &quot;2104804921&quot;,
+            &quot;postal_code&quot;: &quot;16451&quot;,
+            &quot;contact_phone&quot;: &quot;6947089513&quot;,
+            &quot;website&quot;: &quot;&quot;
+        }
+    }
+}
+
+Content-encoding:
+null
+List of payments: ===============================================
+
+Content-encoding:
+gzip
+Find payment:
+{
+    &quot;token&quot;: &quot;pmt_1HTe9PGniaTDCJB2ZrBRhZSq&quot;,
+    &quot;date_created&quot;: &quot;2014-07-23T15:44:44+0300&quot;,
+    &quot;description&quot;: &quot;ΑΒΓΔ αβγδ&quot;,
+    &quot;amount&quot;: 1100,
+    &quot;fee_amount&quot;: 0,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;status&quot;: &quot;Refunded&quot;,
+    &quot;refunded&quot;: true,
+    &quot;refund_amount&quot;: 1100,
+    &quot;refunds&quot;: [
+        {
+            &quot;date_created&quot;: &quot;2014-07-23T15:44:45+0300&quot;,
+            &quot;amount&quot;: 0,
+            &quot;description&quot;: &quot;Test&quot;
+        }
+    ],
+    &quot;card&quot;: {
+        &quot;expiration_month&quot;: &quot;12&quot;,
+        &quot;expiration_year&quot;: &quot;2014&quot;,
+        &quot;last_four&quot;: &quot;9011&quot;,
+        &quot;type&quot;: &quot;Visa&quot;,
+        &quot;holder_name&quot;: null,
+        &quot;country&quot;: null
+    }
+}
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>Generated by 
+<a href="http://www.gradle.org">Gradle 2.0</a> at 23.07.2014 15:44:53</p>
+</div>
+</div>
+</body>

@@ -3,6 +3,9 @@ package com.everypay.api;
 import it.sauronsoftware.base64.Base64;
 
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,7 +24,9 @@ import java.util.Scanner;
 import java.util.zip.GZIPInputStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,13 +67,15 @@ public class Server {
 	// public static final String HOST = "api.testing.everypay.gr";
 	// public static final String HOST = "176.9.114.244";
 
-//	 public static final String HOST = "https://api.everypay.gr:443/";
-//	 public static final String HOST_ = "api.everypay.gr";
-//	 public static final int PORT = 443;
+	 public static final String HOST = "https://api.everypay.gr:443/";
+	 public static final String HOST_ = "api.everypay.gr";
+	 public static final int PORT = 443;
 
-	public static final String HOST = "https://api-v1-test.everypay.gr:55555/";
-	public static final String HOST_ = "api-v1-test.everypay.gr";
-	public static final int PORT = 55555;
+//	public static final String HOST = "https://api-v1-test.everypay.gr:55555/";
+//	public static final String HOST_ = "api-v1-test.everypay.gr";
+//	public static final int PORT = 55555;
+
+	 public HttpsURLConnection connection = null;
 
 	/** JSON server response field names */
 
@@ -111,12 +118,16 @@ public class Server {
 	private double lastDelay=0;
 	public String delayLog="";
 	public double startTime = 0; 
+	public java.security.cert.X509Certificate sert;
 
 	/** REST API methods */
 	private enum RequestMethod {
 		GET, POST, PUT, DELETE
 	};
 
+	private TrustManager[] trustAllCerts;
+	private SSLContext sc;	
+	private HostnameVerifier allHostsValid;
 	/**
 	 * 
 	 * @return singleton Server instance
@@ -136,6 +147,8 @@ public class Server {
 	 * @param connection
 	 * @param company
 	 */
+	
+	
 
 	private void signRequest(HttpsURLConnection connection, Company company) {
 		String credentials = company.getKey() + ":";
@@ -144,6 +157,35 @@ public class Server {
 				+ base64EncodedCredentials);
 	}
 
+	public java.security.cert.X509Certificate getSert() {
+		return sert;
+	}
+
+	public void setSert(java.security.cert.X509Certificate sert) {
+		this.sert = sert;
+	}
+
+	public X509Certificate getServerSert()
+	{
+		try {
+			 InputStream inStream =  new FileInputStream(new File("-.everypay.gr.crt"));
+			 CertificateFactory cf;
+			cf = CertificateFactory.getInstance("X.509");
+			 X509Certificate cert = (X509Certificate)cf.generateCertificate(inStream);
+			 inStream.close();
+			 return cert;
+		} catch (CertificateException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
+	
+	
+	
 	public Company authorize(String userName, String password, ResultCallback resultCallback)
 			throws ServerConnectionException {
 
@@ -160,6 +202,11 @@ public class Server {
 			preparePostQuery(connection, map, RequestMethod.POST);
 
 			int serverResponseCode = connection.getResponseCode();
+
+			for (Certificate certificate : connection.getServerCertificates()){
+				System.out.println("certificate "+sert.getSigAlgName());
+				System.out.println("certificate "+certificate.getType()+"  "+certificate.getPublicKey().getAlgorithm());
+			}
 
 			String responseString = getResponse(serverResponseCode, connection);
 			if (DEVELOPMENT_MODE)
@@ -269,57 +316,57 @@ public class Server {
 
 	
 	
-	/**
-	 * Creates credit card token and stores it in the card object
-	 * 
-	 * @param company
-	 * @param card
-	 * @throws ServerConnectionException
-	 */
-
-	public void createCardToken(Company company, Card card)
-			throws ServerConnectionException {
-		defaultCompany = company;
-		HttpsURLConnection connection = null;
-		try {
-
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(card.getExpiration());
-			int year = cal.get(Calendar.YEAR);
-			int month = cal.get(Calendar.MONTH);
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put(PAR_CARD_NUMBER, card.getNumber());
-			map.put(PAR_EXPIRATION_YEAR, Integer.toString(year - 1900));
-			map.put(PAR_EXPIRATION_MONTH, Integer.toString(month + 1));
-			map.put(PAR_CVV, card.getCvv());
-			// if (card.getHolderName() != null)
-			// map.put(PAR_HOLDER_NAME, card.getHolderName());
-			// if (card.getCountry() != null)
-			// map.put(PAR_COUNTRY, card.getCountry());
-			// System.out.println(year-1900+" year "+month +" month");
-
-			connection = createSecureConnection(HOST + API_TOKENS, company);
-			preparePostQuery(connection, map, RequestMethod.POST);
-
-			int serverResponseCode = connection.getResponseCode();
-			String responseString = getResponse(serverResponseCode, connection);
-			// if (DEVELOPMENT_MODE)
-			System.out.println(responseString);
-			if (serverResponseCode < 400) {
-				Token tok = Token.deserialized(responseString, TokenType.Card);
-				card.setToken(tok);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new ServerConnectionException(e);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			throw new ServerConnectionException(e);
-		} finally {
-			if (connection != null)
-				connection.disconnect();
-		}
-	}
+//	/**
+//	 * Creates credit card token and stores it in the card object
+//	 * 
+//	 * @param company
+//	 * @param card
+//	 * @throws ServerConnectionException
+//	 */
+//
+//	public void createCardToken(Company company, Card card, Payment payment)
+//			throws ServerConnectionException {
+//		defaultCompany = company;
+//		HttpsURLConnection connection = null;
+//		try {
+//
+//			int year = card.getExpirationYear();
+//			int month = card.getExpirationMonth();
+//			HashMap<String, String> map = new HashMap<String, String>();
+//			map.put(PAR_CARD_NUMBER, card.getNumber());
+//			map.put(PAR_EXPIRATION_YEAR, Integer.toString(year - 1900));
+//			map.put(PAR_EXPIRATION_MONTH, Integer.toString(month + 1));
+//			map.put(PAR_CVV, card.getCvv());
+//			map.put(PAR_HOLDER_NAME, "Test");
+//			map.put(PAR_AMOUNT, payment.getAmountString());
+//			// if (card.getHolderName() != null)
+//			// map.put(PAR_HOLDER_NAME, card.getHolderName());
+//			// if (card.getCountry() != null)
+//			// map.put(PAR_COUNTRY, card.getCountry());
+//			// System.out.println(year-1900+" year "+month +" month");
+//
+//			connection = createSecureConnection(HOST + API_TOKENS, company);
+//			preparePostQuery(connection, map, RequestMethod.POST);
+//
+//			int serverResponseCode = connection.getResponseCode();
+//			String responseString = getResponse(serverResponseCode, connection);
+//			// if (DEVELOPMENT_MODE)
+//			System.out.println(responseString);
+//			if (serverResponseCode < 400) {
+//				Token tok = Token.deserialized(responseString, TokenType.Card);
+//				card.setToken(tok);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new ServerConnectionException(e);
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//			throw new ServerConnectionException(e);
+//		} finally {
+//			if (connection != null)
+//				connection.disconnect();
+//		}
+//	}
 
 	/**
 	 * Looks for existed credit card token
@@ -371,8 +418,12 @@ public class Server {
 					tok = new Token(token, TokenType.Card);
 					tok.setUsed(used);
 					tok.setExpired(expired);
+
+//					tok.setDateRequested(new SimpleDateFormat(
+//							"dd-MM-yyyy hh:mm:ss", Locale.ENGLISH)
+//							.parse(requested));
 					tok.setDateRequested(new SimpleDateFormat(
-							"dd-MM-yyyy hh:mm:ss", Locale.ENGLISH)
+							"yyyy-MM-dd'T'HH:mm:ssZ", Locale.ENGLISH)
 							.parse(requested));
 
 					card.setToken(tok);
@@ -811,13 +862,14 @@ public class Server {
 		defaultCompany = company;
 		ArrayList<Payment> payments = new ArrayList<Payment>();
 
-		HttpsURLConnection connection = null;
+//		HttpsURLConnection 
+		connection = null;
 		try {
 
 			StringBuilder params = new StringBuilder("?");
 
 			boolean first = true;
-			if (status != Status.All && status != null) {
+			if (status != Status.all && status != null) {
 				String statusValue = URLEncoder.encode(status.toString(),
 						"UTF-8");
 				params.append(PAR_STATUS + "=" + statusValue);
@@ -845,26 +897,31 @@ public class Server {
 			}
 
 			if (dateFrom != null) {
-				String fromValue = URLEncoder.encode(
-						"" + (int) Math.floor(dateFrom.getTime() / 1000),
-						"UTF-8");
+				String dateFromString = new SimpleDateFormat("yyyy-MM-dd")
+				.format(dateFrom);
+				
+//				String fromValue = URLEncoder.encode(
+//						"" + (int) Math.floor(dateFrom.getTime() / 1000),
+//						"UTF-8");
 				if (!first) {
 					params.append("&");
 				} else {
 					first = false;
 				}
-				params.append(PAR_DATE_FROM + "=" + fromValue);
+				params.append(PAR_DATE_FROM + "=" + dateFromString);
 			}
 
 			if (dateTo != null) {
-				String toValue = URLEncoder.encode(
-						"" + (int) Math.ceil(dateTo.getTime() / 1000), "UTF-8");
+				String dateToString = new SimpleDateFormat("yyyy-MM-dd")
+				.format(dateTo);
+//				String toValue = URLEncoder.encode(
+//						"" + (int) Math.ceil(dateTo.getTime() / 1000), "UTF-8");
 				if (!first) {
 					params.append("&");
 				} else {
 					first = false;
 				}
-				params.append(PAR_DATE_TO + "=" + toValue);
+				params.append(PAR_DATE_TO + "=" + dateToString);
 			}
 
 			String paramsString = (first) ? "" : params.toString();
@@ -873,6 +930,9 @@ public class Server {
 					+ paramsString, company);
 			connection.addRequestProperty("Accept-Encoding", "gzip,deflate");
 			connection.setRequestMethod("GET");
+
+//			if (DEVELOPMENT_MODE)
+//				System.out.println("List of payments in "+status.toString()+": ===============================================\n");
 
 			int serverResponseCode = connection.getResponseCode();
 
@@ -883,6 +943,7 @@ public class Server {
 				System.out.println("Content-encoding:\n"
 						+ connection.getContentEncoding());
 
+			if (responseString.length()!=0){
 			JSONObject jsonResponse = new JSONObject(responseString);
 			if (jsonResponse.has("items")) {
 				JSONArray jsonItems = jsonResponse.getJSONArray("items");
@@ -890,7 +951,7 @@ public class Server {
 					String jsonItem = jsonItems.optString(i);
 					payments.add(Payment.deserialize(jsonItem, null));
 				}
-			}
+			}}
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -988,6 +1049,7 @@ public class Server {
 			int serverResponseCode = connection.getResponseCode();
 
 			String responseString = getResponse(serverResponseCode, connection);
+			System.out.println("response "+responseString);
 			JSONObject jsonEmailResponse = new JSONObject(responseString);
 			res = jsonEmailResponse.getBoolean(JSON_EMAIL_SENT);
 
@@ -1007,7 +1069,11 @@ public class Server {
 		} catch (JSONException e) {
 			e.printStackTrace();
 			throw new ServerConnectionException(e);
-		} finally {
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new ServerConnectionException(e);
+		} 
+		finally {
 			if (connection != null)
 				connection.disconnect();
 		}
@@ -1033,15 +1099,15 @@ public class Server {
 
 	public void newPaymentWithCard(Company company, Card card, Payment payment)
 			throws ServerConnectionException {
-//		delayLog = "";
-//		startTime = (new Date()).getTime()/1000.0;
+		if (card == null || payment == null || company == null) throw new ServerConnectionException("NULL method parameter.");
+		
 		
 		HttpsURLConnection connection = null;
 		try {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(card.getExpiration());
-			int year = cal.get(Calendar.YEAR);
-			int month = cal.get(Calendar.MONTH);
+//			Calendar cal = Calendar.getInstance();
+//			cal.setTime(card.getExpiration());
+			int year = card.getExpirationYear();
+			int month = card.getExpirationMonth();
 
 			connection = createSecureConnection(HOST + API_PAYMENTS, company);
 			
@@ -1053,8 +1119,7 @@ public class Server {
 			map.put(PAR_AMOUNT, payment.getAmountString());
 			map.put(PAR_CURRENCY, "eur");
 			map.put(PAR_DESCRIPTION, payment.getDescription());
-			if (card.getHolderName().length() > 0)
-				map.put(PAR_HOLDER_NAME, card.getHolderName());
+			map.put(PAR_HOLDER_NAME, card.getHolderName());
 
 			preparePostQuery(connection, map, RequestMethod.POST);
 
@@ -1063,6 +1128,9 @@ public class Server {
 			String responseString = getResponse(serverResponseCode, connection);
 
 			delayLog += "Response received "+ String.format("%1$,.3f", (new Date()).getTime()/1000.0 - startTime) +"\n"; 
+			if (DEVELOPMENT_MODE)
+				System.out.println("New payment with card:\n"
+						+ responseString);
 
 			Payment.deserialize(responseString, payment, null);
 
@@ -1194,7 +1262,7 @@ public class Server {
 	 * @throws ServerConnectionException
 	 */
 
-	public void refundPayment(Company company, Payment payment, double amount)
+	public void refundPayment(Company company, Payment payment, double amount, String description)
 			throws ServerConnectionException {
 
 		HttpsURLConnection connection = null;
@@ -1206,7 +1274,10 @@ public class Server {
 			HashMap<String, String> map = new HashMap<String, String>();
 			if (amount != 0.0)
 				map.put(PAR_AMOUNT, Integer.toString((int) (amount * 100)));
-
+			if (description!=null)
+				if (description.length()>0)
+					map.put(PAR_DESCRIPTION, description);
+			
 			// map.put("test", "test");
 
 			preparePostQuery(connection, map, RequestMethod.POST);
@@ -1237,10 +1308,10 @@ public class Server {
 	 * @throws ServerConnectionException
 	 */
 
-	public void refundPayment(Company company, Payment payment)
+	public void refundPayment(Company company, Payment payment, String description)
 			throws ServerConnectionException {
 
-		refundPayment(company, payment, 0);
+		refundPayment(company, payment, 0, description);
 	}
 
 	/**
@@ -1258,10 +1329,16 @@ public class Server {
 	 */
 
 	private HttpsURLConnection createSecureConnection(String urlString,
-			Company company) throws ServerConnectionException {
+			final Company company) throws ServerConnectionException {
 
-		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+		if (trustAllCerts==null || sc == null){
+		trustAllCerts = new TrustManager[] { new X509TrustManager() {
 			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+				if (sert!=null){
+					System.out.println("Our certificate is "+sert.getSigAlgName());
+					return new java.security.cert.X509Certificate[] {sert};
+					}
+				else
 				return null;
 			}
 
@@ -1287,20 +1364,26 @@ public class Server {
 		}
 
 		HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+		}
 		// Create all-trusting host name verifier
-		HostnameVerifier allHostsValid = new HostnameVerifier() {
-
-			@Override
-			public boolean verify(String arg0, SSLSession arg1) {
-				return true;
-			}
-		};
-		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-
+//		if (allHostsValid == null){
+//		allHostsValid = new HostnameVerifier() {
+//
+//			@Override
+//			public boolean verify(String arg0, SSLSession session) {
+////				 HostnameVerifier hv =
+////				            HttpsURLConnection.getDefaultHostnameVerifier();
+////				        return hv.verify(HOST_, session);				
+//				return true;
+//			}
+//		};
+//		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+//		}
 		HttpsURLConnection connection = null;
 		try {
 			connection = (HttpsURLConnection) (new URL(urlString))
 					.openConnection();
+				
 			connection.setReadTimeout(60000);
 			connection.setConnectTimeout(60000);
 			connection.setRequestProperty("Accept-Charset", "UTF-8");
@@ -1337,6 +1420,7 @@ public class Server {
 				is = connection.getInputStream();
 			} catch (IOException e) {
 				e.printStackTrace();
+				return "";
 			}
 		}
 
@@ -1367,7 +1451,12 @@ public class Server {
 
 		
 		setLastDelay(getDelay(sb.toString()));
-		
+
+//		try {
+//			is.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		return sb.toString();
 	}
@@ -1407,23 +1496,34 @@ public class Server {
 
 		connection.setRequestProperty("Content-Length", "" + queryString.length());
 		
-		// System.out.println(queryString);
-		DataOutputStream output;
+		System.out.println(queryString);
+		DataOutputStream output = null;
+		OutputStream os = null;
 		try {
 			connection.setRequestMethod(method.name());
 			connection.setDoOutput(true);
-			 OutputStream os = connection.getOutputStream();
+//			connection.setUseCaches(true);
+			 os = connection.getOutputStream();
 			output = new DataOutputStream(os);
 			output.writeBytes(queryString);
 			 if (((new Date()).getTime()/1000.0 - startTime) <100)
 			delayLog += "Request sent "+ String.format("%1$,.3f", (new Date()).getTime()/1000.0 - startTime) +"\n"; 
-			output.close();
 		} catch (IOException e) {
 			System.out.println("ups... ");
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("ups... ");
 			e.printStackTrace();
+		} finally {
+				try {
+					if (output!=null)
+					output.close();
+					if (os!=null)
+					os.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 		}
 
 	}

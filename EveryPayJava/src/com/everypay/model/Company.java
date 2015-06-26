@@ -1,5 +1,7 @@
 package com.everypay.model;
 
+import java.security.cert.X509Certificate;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +36,7 @@ public class Company {
 	private final static String JSON_REQUEST_TIME = "request_time_sec";
 	private final static String JSON_ERROR = "error";
 	private final static String JSON_MESSAGE = "message";
+	private final static String JSON_CODE = "code";
 
 	private String name;
 	private String key;
@@ -42,7 +45,9 @@ public class Company {
 			addressNumber, occupation, fixedPhone, postalCode, contactPhone,
 			webSIte;
 	private double requestTime;
-
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -281,9 +286,9 @@ public class Company {
 		JSONObject jsonCompany = new JSONObject(response);
 
 		if (jsonCompany.has(JSON_ERROR))
-			if (!jsonCompany.isNull(JSON_SESSION_TOKEN)) {
+//			if (!jsonCompany.isNull(JSON_SESSION_TOKEN)) {
 				return true;
-			}
+//			}
 
 		return false;
 	}
